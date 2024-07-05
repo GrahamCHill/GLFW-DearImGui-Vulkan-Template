@@ -20,7 +20,7 @@
 #include <stdlib.h>         // abort
 #define GLFW_INCLUDE_NONE
 #define GLFW_INCLUDE_VULKAN
-#include <GLFW/glfw3.h>
+#include "GLFW/glfw3.h"
 
 // Volk headers
 #ifdef IMGUI_IMPL_VULKAN_USE_VOLK

@@ -12,12 +12,12 @@ if (APPLE AND NOT EMSCRIPTEN)
 
 
             COMMAND ${CMAKE_COMMAND} -E copy
-            "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/libvulkan.1.3.283.dylib"
+            "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/${VULKAN_LIB}"
             "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/libvulkan.1.dylib"
 
             COMMAND ${CMAKE_COMMAND} -E copy
-            "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/libvulkan.1.3.283.dylib"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/libvulkan.1.3.283.dylib"
+            "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/${VULKAN_LIB}"
+            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/${VULKAN_LIB}"
 
             COMMAND ${CMAKE_COMMAND} -E copy
             "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/libMoltenVK.dylib"
@@ -26,7 +26,6 @@ if (APPLE AND NOT EMSCRIPTEN)
             COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_CURRENT_SOURCE_DIR}/MoltenVK_icd.json"
             "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/vulkan/icd.d/MoltenVK_icd.json"
-
 
 
             COMMAND install_name_tool -change

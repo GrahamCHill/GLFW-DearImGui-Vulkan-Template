@@ -2,51 +2,24 @@ cmake_minimum_required(VERSION 3.28)
 project(Vulkan_New)
 set(CMAKE_CXX_STANDARD 17)
 
-
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     option(BUILD_HTML "Build html also!" ON)
     set(EMSCRIPTEN TRUE)
     set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
 endif()
 
-if(APPLE AND NOT EMSCRIPTEN)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
-    #set(CMAKE_OSX_ARCHITECTURES "arm64") #Arm64 systems
-    #set(CMAKE_OSX_ARCHITECTURES "x86_64") #Intel x86-64 systems
-    set(CMAKE_OSX_ARCHITECTURES "arm64; x86_64") #Universal Binary
-endif()
-set(VULKANVERSION 1.3.283.0)
-# The pattern for copying files to the resources directory
-set(SOURCE_PATTERN "*.*")
-
+# Change settings in the file below
+include(CMakeSettings/CMakeLists.txt)
 message(STATUS "Project Name: ${PROJECT_NAME}")
 
+# Handles Platform specific code
 include(CMake/CMakeLists.txt)
+# Includes Submodules
+include(Submodules/CMakeLists.txt)
+# Where your files will go
+include(src/CMakeLists.txt)
 
-
-add_executable(${PROJECT_NAME}
-        main.cpp
-        ${SUBMODULE_INCLUDE})
-
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Debug build")
-
-    target_include_directories(${PROJECT_NAME} PRIVATE ${Vulkan_INCLUDE_DIRS})
-    target_link_libraries(${PROJECT_NAME} ${Vulkan_LIBRARIES} glfw)
-
-else()
-    message(STATUS "Not a Debug build")
-
-    target_link_libraries(${PROJECT_NAME}
-            ${TARGET_LIBS}
-            ${VULKAN_MACOS_LIBS}
-            glfw
-    )
-    include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)
-endif()
-
-
+# macOS build
 if(APPLE)
     set_target_properties(${PROJECT_NAME}
             PROPERTIES
@@ -61,4 +34,23 @@ if(APPLE)
             BUILD_WITH_INSTALL_RPATH TRUE
             INSTALL_RPATH "@executable_path/../Frameworks"
     )
+
+    # Linux Build
+elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
+
+    # Windows Build
+elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
+    set_target_properties(${PROJECT_NAME} PROPERTIES
+            CMAKE_CXX_STANDARD_REQUIRED ON
+            CMAKE_INCLUDE_CURRENT_DIR  ON
+            CXX_EXTENSIONS NO)
+
+    # Web Build
+elseif (NOT APPLE AND EMSCRIPTEN)
+    if (BUILD_HTML)
+        message(STATUS "Building .html file")
+        set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
+    endif()
+    target_compile_definitions(${PROJECT_NAME} PUBLIC -DEMSCRIPTEN=1)
+    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-s USE_GLFW=3 -s USE_WEBGL2=1 -s FULL_ES3=1")
 endif ()
