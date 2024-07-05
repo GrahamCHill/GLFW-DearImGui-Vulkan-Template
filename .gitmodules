@@ -11,3 +11,6 @@
 [submodule "Submodules/External/stb"]
 	path = Submodules/External/stb
 	url = https://github.com/nothings/stb
+[submodule "Submodules/External/glfw"]
+	path = Submodules/External/glfw
+	url = https://github.com/glfw/glfw
