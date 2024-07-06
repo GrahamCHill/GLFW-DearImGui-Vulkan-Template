@@ -2,15 +2,6 @@
 	path = Submodules/External/imgui
 	url = https://github.com/ocornut/imgui.git
 	branch = docking
-[submodule "Submodules/External/miniaudio"]
-	path = Submodules/External/miniaudio
-	url = https://github.com/mackron/miniaudio
-[submodule "Submodules/External/LDtkLoader"]
-	path = Submodules/External/LDtkLoader
-	url = https://github.com/Madour/LDtkLoader
-[submodule "Submodules/External/stb"]
-	path = Submodules/External/stb
-	url = https://github.com/nothings/stb
 [submodule "Submodules/External/glfw"]
 	path = Submodules/External/glfw
 	url = https://github.com/glfw/glfw

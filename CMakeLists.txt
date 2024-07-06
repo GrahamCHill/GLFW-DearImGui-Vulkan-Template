@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(Vulkan_New)
+project(Portable_Vulkan_Template)
 set(CMAKE_CXX_STANDARD 17)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -25,7 +25,7 @@ if(APPLE)
             PROPERTIES
             MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME}
             MACOSX_BUNDLE_COPYRIGHT "Copyright © 1995-2009, ${PROJECT_NAME} , All Rights Reserved."
-            MACOSX_BUNDLE_GUI_IDENTIFIER ${PROJECT_NAME}.grahamhill.dev
+            MACOSX_BUNDLE_GUI_IDENTIFIER "${PROJECT_NAME}.grahamhill.dev"
             MACOSX_BUNDLE_BUNDLE_VERSION 1.0
             MACOSX_BUNDLE_SHORT_VERSION_STRING 1.0
             MACOSX_BUNDLE TRUE
