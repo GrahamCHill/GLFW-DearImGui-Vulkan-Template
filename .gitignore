@@ -1,3 +1,14 @@
 /cmake-build-debug/
 /cmake-build-minsizerel/
 /cmake-build-release/
+/.idea/.name
+/.idea/git_toolbox_prj.xml
+/.idea/GitLink.xml
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/moltenVKPortableTemplate.iml
+/.idea/vcs.xml
+/.idea/workspace.xml
+Submodules/External/.DS_Store
+Submodules/.DS_Store
+.DS_Store
