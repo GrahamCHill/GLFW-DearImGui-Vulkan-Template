@@ -1,7 +1,5 @@
 message(STATUS "minOS supported version: ${CMAKE_OSX_DEPLOYMENT_TARGET}")
 
-set(${RESOURCES} MyAppImage.icns)
-
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Bundling for a debug build -- will not be portable")
     message(NOTICE "Remember to update where your Vulkan Install is, for a Release build")
