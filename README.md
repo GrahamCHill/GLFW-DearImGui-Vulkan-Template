@@ -6,7 +6,7 @@ I will look at an SDL variant as a possible alternate windowing manager.
 
 
 The following is how the web build will be generated (that will default to OpenGL so it has maximum browser compatibility.)
-## This is not yet ready
+## The following is not yet ready
  To build Emscripten make sure emscripten is active on your
  system and run the following commands in your terminal      
  mkdir build && cd build  
