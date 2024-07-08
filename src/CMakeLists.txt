@@ -2,7 +2,7 @@ add_executable(${PROJECT_NAME}
         WIN32 MACOSX_BUNDLE
         src/main.cpp
         ${SUBMODULE_INCLUDE}
-        ${APP_ICON_RESOURCE_WINDOWS}
+        ${APP_ICON}
 )
 
 
