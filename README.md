@@ -1,8 +1,12 @@
-# moltenVKPortableTemplate
-Should be a barebones MoltenVk template (easy to alter for Windows or Linux support)
+# Vulkan DearImGui Template
+A template that uses Vulkan on Windows and MoltenVK on macOS that allows setting of application icon by the developer with convenience files.  
+This is a relativly simple template file allowing you to develop from ocornut's [DearImGui]([https://www.genome.gov/](https://github.com/ocornut/imgui)) GLFW+Vulkan template.  
+I will look at an SDL variant as a possible alternate windowing manager.  
 
 
 
+The following is how the web build will be generated (that will default to OpenGL so it has maximum browser compatibility.)
+## This is not yet ready
  To build Emscripten make sure emscripten is active on your
  system and run the following commands in your terminal      
  mkdir build && cd build  
