@@ -1,6 +1,8 @@
 add_executable(${PROJECT_NAME}
+        WIN32 MACOSX_BUNDLE
         src/main.cpp
         ${SUBMODULE_INCLUDE}
+        ${APP_ICON_RESOURCE_WINDOWS}
 )
 
 
@@ -14,6 +16,7 @@ if (APPLE)
         )
 
     else()
+        # Holdover and ensures a dynamic library
         target_link_libraries(${PROJECT_NAME}
                 ${VULKAN_MACOS_LIBS}
                 ${TARGET_LIBS}
@@ -36,6 +39,7 @@ elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
     target_link_libraries(${PROJECT_NAME}
             ${Vulkan_LIBRARIES}
             ${TARGET_LIBS})
+
 
     # Web Build
 elseif (NOT APPLE AND EMSCRIPTEN)
