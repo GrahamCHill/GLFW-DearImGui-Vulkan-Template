@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.28)
-project(Portable_Vulkan_Template)
+# Change settings in the file below
+include(CMakeSettings/CMakeLists.txt)
+project(${EXECUTABLE_NAME})
 set(CMAKE_CXX_STANDARD 17)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -8,9 +10,9 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
 endif()
 
-# Change settings in the file below
-include(CMakeSettings/CMakeLists.txt)
-message(STATUS "Project Name: ${PROJECT_NAME}")
+
+message(STATUS "Project Name: ${EXECUTABLE_NAME}")
+
 
 # Handles Platform specific code
 include(CMake/CMakeLists.txt)
@@ -21,9 +23,14 @@ include(src/CMakeLists.txt)
 
 # macOS build
 if(APPLE)
-    set_target_properties(${PROJECT_NAME}
+    target_include_directories(${EXECUTABLE_NAME} PRIVATE ${Vulkan_INCLUDE_DIRS})
+    target_link_libraries(${EXECUTABLE_NAME}
+            ${Vulkan_LIBRARIES}
+            ${TARGET_LIBS}
+    )
+    set_target_properties(${EXECUTABLE_NAME}
             PROPERTIES
-            MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME}
+            MACOSX_BUNDLE_BUNDLE_NAME ${EXECUTABLE_NAME}
             MACOSX_BUNDLE_COPYRIGHT "Copyright © 1995-2009, ${PROJECT_NAME} , All Rights Reserved."
             MACOSX_BUNDLE_GUI_IDENTIFIER "${PROJECT_NAME}.grahamhill.dev"
             MACOSX_BUNDLE_ICON_FILE "myAppImage.icns"
@@ -38,10 +45,22 @@ if(APPLE)
 
     # Linux Build
 elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
+    target_link_libraries(${EXECUTABLE_NAME}
+            ${Vulkan_LIBRARIES}
+            ${TARGET_LIBS}
+    )
 
     # Windows Build
 elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
-    set_target_properties(${PROJECT_NAME} PROPERTIES
+    set(CMAKE_EXE_LINKER_FLAGS -static)
+    target_include_directories(${EXECUTABLE_NAME}
+            PRIVATE ${Vulkan_INCLUDE_DIRS})
+
+    target_link_libraries(${EXECUTABLE_NAME}
+            ${Vulkan_LIBRARIES}
+            ${TARGET_LIBS})
+
+    set_target_properties(${EXECUTABLE_NAME} PROPERTIES
             CMAKE_CXX_STANDARD_REQUIRED ON
             CMAKE_INCLUDE_CURRENT_DIR  ON
             CXX_EXTENSIONS NO)
@@ -50,10 +69,16 @@ elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
 
     # Web Build
 elseif (NOT APPLE AND EMSCRIPTEN)
+    target_link_libraries(${EXECUTABLE_NAME}
+            ${TARGET_LIBS}
+    )
     if (BUILD_HTML)
         message(STATUS "Building .html file")
-        set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".html")
+        set_target_properties(${EXECUTABLE_NAME} PROPERTIES SUFFIX ".html")
     endif()
-    target_compile_definitions(${PROJECT_NAME} PUBLIC -DEMSCRIPTEN=1)
-    set_target_properties(${PROJECT_NAME} PROPERTIES LINK_FLAGS "-s USE_GLFW=3 -s USE_WEBGL2=1 -s FULL_ES3=1")
+    target_compile_definitions(${EXECUTABLE_NAME} PUBLIC -DEMSCRIPTEN=1)
+    set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-s USE_GLFW=3 -s USE_WEBGL2=1 -s FULL_ES3=1")
 endif ()
+
+
+include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)

@@ -1,3 +1,4 @@
+set(EXECUTABLE_NAME "Vulkan_App_Template")
 # Apple Specific Settings
 if(APPLE AND NOT EMSCRIPTEN)
     set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
