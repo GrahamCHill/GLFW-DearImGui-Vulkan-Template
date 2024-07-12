@@ -8,6 +8,10 @@ if(APPLE AND NOT EMSCRIPTEN)
     set(CMAKE_OSX_ARCHITECTURES "arm64; x86_64") #Universal Binary
 
     set(CODE_SIGN FALSE)
+    # Run the following command to find your Signing ID
+    # security find-identity -p codesigning -v
+    # Just replace the placeholder in the code below if CODE_SIGN is true
+    set(SIGN_ID "Apple Development: your-email@email.com \\(j3rgt32tfs\\)")
 
     # Found in $ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/
     set(VULKAN_LIB "libvulkan.1.3.283.dylib")

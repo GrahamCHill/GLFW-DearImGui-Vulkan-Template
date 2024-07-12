@@ -60,10 +60,8 @@ if (APPLE)
 
     if(CODE_SIGN)
         add_custom_command(TARGET ${EXECUTABLE_NAME} POST_BUILD
-                # Run the following command to find your Signing ID
-                # security find-identity -p codesigning -v
-                # Just replace the place holder in the code below if CODE_SIGN is true
-                COMMAND /usr/bin/codesign --deep --force --verify --verbose --sign "Apple Development: your-email@email.com \\(j3rgt32tfs\\)"
+                COMMAND /usr/bin/codesign --deep --force --verify --verbose --sign
+                        ${SIGN_ID}
                 "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app"
                 COMMENT "Signing the app bundle"
         )
