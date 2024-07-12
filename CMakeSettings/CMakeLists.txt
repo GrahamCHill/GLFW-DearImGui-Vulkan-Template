@@ -11,11 +11,16 @@ if(APPLE AND NOT EMSCRIPTEN)
     set(VULKAN_LIB "libvulkan.1.3.283.dylib")
     set(VULKANVERSION 1.3.283.0)
 
+    set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
+    set(DESTINATION_DIR "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Resources")
+
     # Linux Specific Settings
 elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
 
     # Windows Specific Settings
 elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
+    set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
+    set(DESTINATION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
 
     # Web Specific Settings
 elseif (NOT APPLE AND EMSCRIPTEN)
@@ -23,8 +28,7 @@ elseif (NOT APPLE AND EMSCRIPTEN)
 
 endif()
 
-set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
-set(DESTINATION_DIR "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources")
+
 
 
 # The pattern for copying files to the resources directory

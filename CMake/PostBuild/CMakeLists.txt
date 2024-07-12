@@ -35,25 +35,26 @@ if (APPLE AND NOT EMSCRIPTEN)
     )
 endif ()
 
+if (APPLE)
+    # Use file(GLOB ...) to get the list of files matching the wildcard pattern
+    file(GLOB SOURCE_FILES "${SOURCE_DIR}/${SOURCE_PATTERN}")
 
-# Use file(GLOB ...) to get the list of files matching the wildcard pattern
-file(GLOB SOURCE_FILES "${SOURCE_DIR}/${SOURCE_PATTERN}")
+    # Iterate over the list of source files and add a custom command for each one
+    foreach(SOURCE_FILE ${SOURCE_FILES})
+        # Get the file name from the full path
+        get_filename_component(FILE_NAME ${SOURCE_FILE} NAME)
+        # Define the destination file path
+        set(DESTINATION_FILE "${DESTINATION_DIR}/${FILE_NAME}")
+        message(STATUS "${DESTINATION_FILE}")
+        message(STATUS "${SOURCE_FILE}")
 
-# Iterate over the list of source files and add a custom command for each one
-foreach(SOURCE_FILE ${SOURCE_FILES})
-    # Get the file name from the full path
-    get_filename_component(FILE_NAME ${SOURCE_FILE} NAME)
-    # Define the destination file path
-    set(DESTINATION_FILE "${DESTINATION_DIR}/${FILE_NAME}")
-    message(STATUS "${DESTINATION_FILE}")
-    message(STATUS "${SOURCE_FILE}")
-
-    # Add a custom command to copy the file after building the target
-    add_custom_command(
-            TARGET ${PROJECT_NAME}
-            POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy
-            "${SOURCE_FILE}"
-            "${DESTINATION_FILE}"
-    )
-endforeach()
+        # Add a custom command to copy the file after building the target
+        add_custom_command(
+                TARGET ${PROJECT_NAME}
+                POST_BUILD
+                COMMAND ${CMAKE_COMMAND} -E copy
+                "${SOURCE_FILE}"
+                "${DESTINATION_FILE}"
+        )
+    endforeach()
+endif ()
