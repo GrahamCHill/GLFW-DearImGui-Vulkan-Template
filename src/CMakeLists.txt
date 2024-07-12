@@ -6,22 +6,14 @@ add_executable(${PROJECT_NAME}
 )
 
 
+
     # macOS build
 if (APPLE)
-    if(CMAKE_BUILD_TYPE STREQUAL "Debug")
         target_include_directories(${PROJECT_NAME} PRIVATE ${Vulkan_INCLUDE_DIRS})
         target_link_libraries(${PROJECT_NAME}
                 ${Vulkan_LIBRARIES}
                 ${TARGET_LIBS}
         )
-
-    else()
-        # Holdover and ensures a dynamic library
-        target_link_libraries(${PROJECT_NAME}
-                ${VULKAN_MACOS_LIBS}
-                ${TARGET_LIBS}
-        )
-    endif()
 
     # Linux Build
 elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
@@ -49,11 +41,4 @@ elseif (NOT APPLE AND EMSCRIPTEN)
 
 endif ()
 
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-    message(STATUS "Debug build")
-
-else()
-    message(STATUS "Not a Debug build")
-endif()
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)

@@ -2,6 +2,11 @@ set(GLFW_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Submodules/external/glfw)
 add_subdirectory(${GLFW_DIR} binary_dir EXCLUDE_FROM_ALL)
 include_directories(${GLFW_DIR}/include)
 
+# Currently not supporting a vulkan web build, it will only support the opengl fallback
+if (NOT  EMSCRIPTEN)
+    find_package(Vulkan REQUIRED)
+endif ()
+
 include(${CMAKE_CURRENT_SOURCE_DIR}/Submodules/CMakeLists.txt)
 
 
