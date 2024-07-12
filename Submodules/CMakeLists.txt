@@ -1,1 +1,1 @@
-include(${CMAKE_CURRENT_SOURCE_DIR}/Submodules/External/imgui.txt)
+include(${CMAKE_CURRENT_SOURCE_DIR}/Submodules/External/imgui.cmake)
