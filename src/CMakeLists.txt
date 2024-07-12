@@ -55,5 +55,5 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 
 else()
     message(STATUS "Not a Debug build")
-    include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)
 endif()
+include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)
