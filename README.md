@@ -36,17 +36,22 @@ This should output a portable binary, this does not codesign the app bundle, it 
 
 This project is licensed under the [MIT license](https://opensource.org/license/mit).  
 
-The following is how the web build will be generated (that will default to OpenGL so it has maximum browser compatibility.)
-## The following is not yet ready
- To build Emscripten make sure emscripten is active on your
- system and run the following commands in your terminal      
- mkdir build && cd build  
- emcmake ..  
- make  
-and it should be built  
-
-
 #### Credits
 GLFW - https://github.com/glfw/glfw  
 Vulkan - https://www.vulkan.org/  
 Dear ImGui - https://github.com/ocornut/imgui
+
+
+## The following is not yet ready
+The following is how the web build will be generated (that will default to OpenGL so it has maximum browser compatibility.)  
+I may add WebGPU support at a later date.  
+ To build Emscripten make sure emscripten is active on your
+ system and run the following commands in your terminal      
+```shell
+ mkdir build && cd build  
+ emcmake ..  
+ make  
+```
+and it should be built  
+
+
