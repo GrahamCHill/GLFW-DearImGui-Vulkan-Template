@@ -1,7 +1,8 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27)
+project("Vulkan_App_Template")
+set(EXECUTABLE_NAME ${PROJECT_NAME})
 # Change settings in the file below
-include(CMakeSettings/CMakeLists.txt)
-project(${EXECUTABLE_NAME})
+include(CMake/Settings/CMakeLists.txt)
 set(CMAKE_CXX_STANDARD 17)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
@@ -9,6 +10,10 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(EMSCRIPTEN TRUE)
     set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
 endif()
+
+if (ENABLE_WARNINGS)
+    include(CMake/Functions/CompilerWarnings.cmake)
+endif ()
 
 
 message(STATUS "Project Name: ${EXECUTABLE_NAME}")

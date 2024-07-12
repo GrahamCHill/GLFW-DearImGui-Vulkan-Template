@@ -1,4 +1,4 @@
-set(EXECUTABLE_NAME "Vulkan_App_Template")
+
 # Apple Specific Settings
 if(APPLE AND NOT EMSCRIPTEN)
     set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
@@ -28,8 +28,8 @@ elseif (NOT APPLE AND EMSCRIPTEN)
 
 endif()
 
-
-
+option(ENABLE_WARNINGS "Enable Compiler Warnings" ON)
+option(ENABLE_WARNINGS_AS_ERRORS "Enable Compiler Warnings as Errors" ON)
 
 # The pattern for copying files to the resources directory
 set(SOURCE_PATTERN "*.*")

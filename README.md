@@ -12,6 +12,11 @@ I will look at an SDL variant as a possible alternate windowing manager.
 | Wasm     |    ❌    |
 | Linux    |     ❌     |
 
+
+Note this works on Clion, but still has issues working with a cmake Xcode generated project,
+will see if there is an easy fix for it.
+There may also be other build errors, but Clion does work on what I have tested so far
+
 ---
 
 
