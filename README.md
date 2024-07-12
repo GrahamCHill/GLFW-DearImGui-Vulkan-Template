@@ -24,6 +24,7 @@ brew reinstall llvm
 ```
 then run the following, this command argument may solve your problems
 ```shell
+mkdir build && cd build  
 cmake -DCMAKE_THREAD_LIBS_INIT="-lpthread" ..
 make 
 ```
