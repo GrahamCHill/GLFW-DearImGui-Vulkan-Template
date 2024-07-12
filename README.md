@@ -12,10 +12,24 @@ I will look at an SDL variant as a possible alternate windowing manager.
 | Wasm     |    ❌    |
 | Linux    |     ❌     |
 
+#### macOS Build 
 
-Note this works on Clion, but still has issues working with a cmake Xcode generated project,
-will see if there is an easy fix for it.
-There may also be other build errors, but Clion does work on what I have tested so far
+You can either use Clion, VSCode or the terminal to build this project.
+
+If you are building from the terminal on macOS and having issues with the build.  
+Assuming you have homebrew installed, you may need to run the following commands first
+```shell
+brew reinstall cmake
+brew reinstall llvm
+```
+then run the following, this command argument may solve your problems
+```shell
+cmake -DCMAKE_THREAD_LIBS_INIT="-lpthread" ..
+make 
+```
+
+This should output a portable binary, this does not codesign the app bundle, it creates an unsigned but portable macOS app.
+
 
 ---
 
