@@ -7,6 +7,8 @@ if(APPLE AND NOT EMSCRIPTEN)
     #set(CMAKE_OSX_ARCHITECTURES "x86_64") #Intel x86-64 systems
     set(CMAKE_OSX_ARCHITECTURES "arm64; x86_64") #Universal Binary
 
+    set(CODE_SIGN FALSE)
+
     # Found in $ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/
     set(VULKAN_LIB "libvulkan.1.3.283.dylib")
     set(VULKANVERSION 1.3.283.0)

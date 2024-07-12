@@ -2,36 +2,36 @@ if (APPLE AND NOT EMSCRIPTEN)
     #Copies, relinks the frameworks file, adds folders in App bundle
     add_custom_command(TARGET ${EXECUTABLE_NAME} POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E make_directory
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Frameworks/"
 
             COMMAND ${CMAKE_COMMAND} -E make_directory
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Resources/"
 
             COMMAND ${CMAKE_COMMAND} -E make_directory
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/vulkan/icd.d/"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Resources/vulkan/icd.d/"
 
 
             COMMAND ${CMAKE_COMMAND} -E copy
             "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/${VULKAN_LIB}"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/libvulkan.1.dylib"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Frameworks/libvulkan.1.dylib"
 
             COMMAND ${CMAKE_COMMAND} -E copy
             "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/${VULKAN_LIB}"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/${VULKAN_LIB}"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Frameworks/${VULKAN_LIB}"
 
             COMMAND ${CMAKE_COMMAND} -E copy
             "$ENV{HOME}/VulkanSDK/${VULKANVERSION}/macOS/lib/libMoltenVK.dylib"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Frameworks/libMoltenVK.dylib"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Frameworks/libMoltenVK.dylib"
 
             COMMAND ${CMAKE_COMMAND} -E copy
             "${CMAKE_CURRENT_SOURCE_DIR}/MoltenVK_icd.json"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/Resources/vulkan/icd.d/MoltenVK_icd.json"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Resources/vulkan/icd.d/MoltenVK_icd.json"
 
 
             COMMAND install_name_tool -change
             "@rpath/libvulkan.1.dylib"
             "@executable_path/../Frameworks/libvulkan.1.dylib"
-            "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.app/Contents/MacOS/${PROJECT_NAME}"
+            "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/MacOS/${PROJECT_NAME}"
     )
 endif ()
 
@@ -57,4 +57,15 @@ if (APPLE)
                 "${DESTINATION_FILE}"
         )
     endforeach()
+
+    if(CODE_SIGN)
+        add_custom_command(TARGET ${EXECUTABLE_NAME} POST_BUILD
+                # Run the following command to find your Signing ID
+                # security find-identity -p codesigning -v
+                # Just replace the place holder in the code below if CODE_SIGN is true
+                COMMAND /usr/bin/codesign --deep --force --verify --verbose --sign "Apple Development: your-email@email.com \\(j3rgt32tfs\\)"
+                "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app"
+                COMMENT "Signing the app bundle"
+        )
+    endif ()
 endif ()
