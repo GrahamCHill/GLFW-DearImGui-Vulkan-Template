@@ -20,22 +20,22 @@ if(APPLE AND NOT EMSCRIPTEN)
     set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
     set(DESTINATION_DIR "${CMAKE_CURRENT_BINARY_DIR}/${EXECUTABLE_NAME}.app/Contents/Resources")
 
+
     # Linux Specific Settings
 elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
+
 
     # Windows Specific Settings
 elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
     set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
     set(DESTINATION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
 
+
     # Web Specific Settings
 elseif (NOT APPLE AND EMSCRIPTEN)
 
 
 endif()
-
-option(ENABLE_WARNINGS "Enable Compiler Warnings" ON)
-option(ENABLE_WARNINGS_AS_ERRORS "Enable Compiler Warnings as Errors" ON)
 
 # The pattern for copying files to the resources directory
 set(SOURCE_PATTERN "*.*")

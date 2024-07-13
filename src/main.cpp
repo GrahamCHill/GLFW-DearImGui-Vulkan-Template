@@ -395,7 +395,6 @@ int main(int argc, char *args[])
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         return 1;
-
     // Create window with Vulkan context
     glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
     GLFWwindow* window = glfwCreateWindow(1280, 720, "Dear ImGui GLFW+Vulkan example", nullptr, nullptr);

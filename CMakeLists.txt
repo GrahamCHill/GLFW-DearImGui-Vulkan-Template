@@ -11,10 +11,6 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
     set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
 endif()
 
-if (ENABLE_WARNINGS)
-    include(CMake/Functions/CompilerWarnings.cmake)
-endif ()
-
 
 message(STATUS "Project Name: ${EXECUTABLE_NAME}")
 
@@ -84,6 +80,5 @@ elseif (NOT APPLE AND EMSCRIPTEN)
     target_compile_definitions(${EXECUTABLE_NAME} PUBLIC -DEMSCRIPTEN=1)
     set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-s USE_GLFW=3 -s USE_WEBGL2=1 -s FULL_ES3=1")
 endif ()
-
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)
