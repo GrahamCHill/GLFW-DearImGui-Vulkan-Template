@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.27)
 project("Vulkan_App_Template")
 set(EXECUTABLE_NAME ${PROJECT_NAME})
 # Change settings in the file below
-include(CMake/Settings/CMakeLists.txt)
+include(Settings.cmake)
 set(CMAKE_CXX_STANDARD 17)
 
 if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")

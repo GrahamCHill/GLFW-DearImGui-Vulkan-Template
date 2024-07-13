@@ -1,4 +1,3 @@
-
 # Apple Specific Settings
 if(APPLE AND NOT EMSCRIPTEN)
     set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
