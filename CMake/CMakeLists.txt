@@ -10,26 +10,18 @@ endif ()
 include(${CMAKE_CURRENT_SOURCE_DIR}/Submodules/CMakeLists.txt)
 
 
-if(APPLE AND NOT EMSCRIPTEN)
-    message(STATUS "Non-web Build")
+if(APPLE)
     message(STATUS "Apple macOS App Bundle Build")
     include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PlatformApple.cmake)
 
 
-elseif (UNIX AND EMSCRIPTEN AND NOT APPLE )
-    message(STATUS "Web Build")
-    message(STATUS "Emscripten Build")
-    include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PlatformWeb.cmake)
 
-
-elseif(UNIX AND NOT EMSCRIPTEN AND NOT APPLE )
-    message(STATUS "Non-web Build")
+elseif(UNIX AND NOT APPLE )
     message(STATUS "Linux/Unix Build")
     include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PlatformLinux.cmake)
 
 
-elseif(NOT UNIX AND NOT EMSCRIPTEN AND NOT APPLE)
-    message(STATUS "Non-web Build")
+elseif(NOT UNIX AND NOT APPLE)
     message("Windows Build")
     include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PlatformWindows.cmake)
 

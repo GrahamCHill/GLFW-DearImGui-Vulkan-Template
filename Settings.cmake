@@ -1,5 +1,5 @@
 # Apple Specific Settings
-if(APPLE AND NOT EMSCRIPTEN)
+if(APPLE)
     set(CMAKE_OSX_DEPLOYMENT_TARGET 10.15)
     ## Set only one of the Architectures
     #set(CMAKE_OSX_ARCHITECTURES "arm64") #Arm64 systems
@@ -21,17 +21,13 @@ if(APPLE AND NOT EMSCRIPTEN)
 
 
     # Linux Specific Settings
-elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
+elseif (NOT APPLE AND UNIX)
 
 
     # Windows Specific Settings
-elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
+elseif (NOT APPLE AND NOT UNIX)
     set(SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
     set(DESTINATION_DIR "${CMAKE_CURRENT_SOURCE_DIR}/Resources")
-
-
-    # Web Specific Settings
-elseif (NOT APPLE AND EMSCRIPTEN)
 
 
 endif()

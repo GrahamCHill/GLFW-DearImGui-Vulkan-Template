@@ -9,7 +9,6 @@ I will look at an SDL variant as a possible alternate windowing manager.
 |:---------|:---------:|
 | Windows  |     ✅     |
 | macOS    |     ✅     |
-| Wasm     |    ❌    |
 | Linux    |     ❌     |
 
 #### macOS Build 
@@ -19,8 +18,8 @@ You can either use Clion, VSCode or the terminal to build this project.
 If you are building from the terminal on macOS and having issues with the build.  
 Assuming you have homebrew installed, you may need to run the following commands first
 ```shell
-brew reinstall cmake
-brew reinstall llvm
+brew install cmake
+brew install llvm
 ```
 then run the following, this command argument may solve your problems
 ```shell
@@ -41,18 +40,3 @@ This project is licensed under the [MIT license](https://opensource.org/license/
 GLFW - https://github.com/glfw/glfw  
 Vulkan - https://www.vulkan.org/  
 Dear ImGui - https://github.com/ocornut/imgui
-
-
-## The following is not yet ready
-The following is how the web build will be generated (that will default to OpenGL so it has maximum browser compatibility.)  
-I may add WebGPU support at a later date.  
- To build Emscripten make sure emscripten is active on your
- system and run the following commands in your terminal      
-```shell
- mkdir build && cd build  
- emcmake ..  
- make  
-```
-and it should be built  
-
-

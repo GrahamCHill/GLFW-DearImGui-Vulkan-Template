@@ -5,12 +5,6 @@ set(EXECUTABLE_NAME ${PROJECT_NAME})
 include(Settings.cmake)
 set(CMAKE_CXX_STANDARD 17)
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Emscripten")
-    option(BUILD_HTML "Build html also!" ON)
-    set(EMSCRIPTEN TRUE)
-    set(CMAKE_FIND_ROOT_PATH_MODE_PACKAGE BOTH)
-endif()
-
 
 message(STATUS "Project Name: ${EXECUTABLE_NAME}")
 
@@ -45,14 +39,14 @@ if(APPLE)
     )
 
     # Linux Build
-elseif (NOT APPLE AND UNIX AND NOT EMSCRIPTEN)
+elseif (NOT APPLE AND UNIX)
     target_link_libraries(${EXECUTABLE_NAME}
             ${Vulkan_LIBRARIES}
             ${TARGET_LIBS}
     )
 
     # Windows Build
-elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
+elseif (NOT APPLE AND NOT UNIX)
     set(CMAKE_EXE_LINKER_FLAGS -static)
     target_include_directories(${EXECUTABLE_NAME}
             PRIVATE ${Vulkan_INCLUDE_DIRS})
@@ -65,20 +59,7 @@ elseif (NOT APPLE AND NOT UNIX AND NOT EMSCRIPTEN)
             CMAKE_CXX_STANDARD_REQUIRED ON
             CMAKE_INCLUDE_CURRENT_DIR  ON
             CXX_EXTENSIONS NO)
-
     set(CMAKE_EXE_LINKER_FLAGS -static)
-
-    # Web Build
-elseif (NOT APPLE AND EMSCRIPTEN)
-    target_link_libraries(${EXECUTABLE_NAME}
-            ${TARGET_LIBS}
-    )
-    if (BUILD_HTML)
-        message(STATUS "Building .html file")
-        set_target_properties(${EXECUTABLE_NAME} PROPERTIES SUFFIX ".html")
-    endif()
-    target_compile_definitions(${EXECUTABLE_NAME} PUBLIC -DEMSCRIPTEN=1)
-    set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-s USE_GLFW=3 -s USE_WEBGL2=1 -s FULL_ES3=1")
 endif ()
 
 include(${CMAKE_CURRENT_SOURCE_DIR}/CMake/PostBuild/CMakeLists.txt)
