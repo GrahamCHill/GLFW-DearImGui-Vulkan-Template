@@ -1,7 +1,7 @@
-# DearImGui Vulkan Template (CMake)  
+# Dear ImGui Vulkan Template (CMake)  
 A template that uses Vulkan on Windows and MoltenVK on macOS that allows setting of application icon by the developer with convenience files.  
-This is a relativly simple template file allowing you to develop from ocornut's [DearImGui](https://github.com/ocornut/imgui) GLFW+Vulkan template.  
-I will look at an SDL variant as a possible alternate windowing manager.  
+This is a relativly simple template file allowing you to develop from ocornut's [Dear ImGui](https://github.com/ocornut/imgui) GLFW+Vulkan template.  
+If you would rather use SDL2 and Dear ImGUI, you can use the sister template I have created here [SDL2 variant](https://github.com/GrahamCHill/SDL2_Vulkan_Template)
 
 ### Currently supported platforms:
 
@@ -38,8 +38,9 @@ app.
 
 ### Notes on the build system
 
-Note the only files you should be concerned with (with CMake) if you are just wanting to use the template for 
-experimenting are the src folder, CMakeLists.txt, and the Settings.cmake file.
+The only files you should be concerned with (with CMake,) if you are just wanting to use the template for 
+experimenting are the src folder, CMakeLists.txt, and the Settings.cmake file. You will still have to add your source 
+files to your application, but this project is to simplfy building cross-platform applications with C++ and Dear Imgui
 
 If you are making a more complex project, then you will want to look into the CMake folder as there are some settings 
 that may need to be changed by you to prepare for a release build.
