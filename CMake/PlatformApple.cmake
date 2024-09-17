@@ -4,6 +4,8 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "Bundling for a debug build -- will not be portable")
     message(NOTICE "Remember to update where your Vulkan Install is, for a Release build")
 
+    find_package(Vulkan)
+
 
 else()
     message(STATUS "Bundling for a release build -- should be portable")
